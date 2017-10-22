@@ -9,4 +9,4 @@ Parse string filters to System.Linq.Dynamic
  <: | smaler than or equal
  \>  | greater than
  \>: | greater than or equal
- :(x,y,z) | inclusive or
+ :(x,y,z) | inclusive or (WHER (x=x OR y=y OR z=>z)
