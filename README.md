@@ -2,7 +2,7 @@
 Parse string filters to System.Linq.Dynamic 
 
  operands | sql equality 
--------  | ---------------------------|
+--- | ---|
  : | equal
  ~ | like
  < | smaler than
