@@ -11,7 +11,6 @@ namespace xApiFilterTest.Db
             Contacts = new HashSet<Contact>();
         }
 
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -22,8 +21,6 @@ namespace xApiFilterTest.Db
 
         public User Responsible { get; set; }
 
-        //public ICollection<User> Approvers { get; set; }
-
         public ICollection<Contact> Contacts { get; set; }
     }
 
@@ -31,7 +28,6 @@ namespace xApiFilterTest.Db
     {
         public User()
         {
-            //Models = new HashSet<Model>();
         }
 
         public int Id { get; set; }
@@ -39,9 +35,6 @@ namespace xApiFilterTest.Db
         public string Name { get; set; }
 
         public string Email { get; set; }
-
-
-        //public ICollection<Model> Models { get; set; }
     }
 
     public class Contact

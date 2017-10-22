@@ -26,13 +26,6 @@ namespace xApiFilterTest.Db
                 .HasOne(x => x.Model)
                 .WithMany(x => x.Contacts)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<Model>()
-            //    .HasOne(x => x.Responsible)
-            //    .WithMany(x => x.Models);
-
-
-
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

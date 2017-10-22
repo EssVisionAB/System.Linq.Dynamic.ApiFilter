@@ -58,7 +58,7 @@ namespace xApiFilterTest
 
 
         [Fact]
-        public void FilterBy_Contact_Like()
+        public void FilterBy_Contacts_Like()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.contacts.name~Gud";
@@ -77,7 +77,7 @@ namespace xApiFilterTest
         }
 
         [Fact]
-        public void FilterBy_Responsible()
+        public void FilterBy_Responsible_Equal_Like()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.responsible.name:Kalle;x.responsible.email~com";
@@ -85,7 +85,6 @@ namespace xApiFilterTest
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
-
                 q = _filterProvider.ApplyFilter(q, filter);
 
                 var result = q.ToArray();
@@ -105,7 +104,6 @@ namespace xApiFilterTest
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
-
                 q = _filterProvider.ApplyFilter(q, filter);
 
                 var result = q.ToArray();
@@ -116,7 +114,7 @@ namespace xApiFilterTest
         }
 
         [Fact]
-        public void FilterBy_RegisteredDate()
+        public void FilterBy_RegisteredDate_GreaterThanOrEqual()
         {
             var filter = "x.registereddate>:2016-12-30";
 
