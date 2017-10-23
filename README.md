@@ -1,6 +1,6 @@
 # System.Linq.Dynamic.ApiFilter
 
-Parse string filter to System.Linq.Dynamic 
+Parse query string filter to System.Linq.Dynamic. 
 
 ### filter example1:
 ```
