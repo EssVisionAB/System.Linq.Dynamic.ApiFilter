@@ -20,7 +20,13 @@ someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
 It is important to have a dot before the searched attribute. For clarity it can be good to use som prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
 
-### Backend usage simple example:
+### Inclusive or filter example:
+```
+someurl/someresource?filter=attributes.name:(name1, name2, name3)
+```
+Will return all resource wich names are 'name1', 'name2' or 'name3'.
+
+### Backend simple usage example:
 ```
 // create predicate factory and filter provider
 var builderFactory = new PredicateBuilderFactory();
@@ -56,5 +62,5 @@ using(vad db = new SomeDbContext())
  <: | smaler than or equal
  \>  | greater than
  \>: | greater than or equal
- :(x,y,z) | inclusive or (WHERE (x=x OR y=y OR z=z))
+ :(a,b,c) | inclusive or (WHERE (x=a OR x=b OR x=c))
  ; | and (combines filters)
