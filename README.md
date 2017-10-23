@@ -1,9 +1,43 @@
 # System.Linq.Dynamic.ApiFilter
 
-Parse string filters to System.Linq.Dynamic 
+Parse string filter to System.Linq.Dynamic 
 
+### filter example1:
+```
+someurl/someresource?filter=attributes.contacts.name~adam
+```
+Will return all resources that has a contact with name containing 'adam'.
 
- operands | sql equality 
+### filter example2:
+```
+someurl/someresource?filter=attributes.contacts.name~adam;attributes.contacts.email~com
+```
+Will return all resources that has a contact with name containing 'adam' and email containing 'com'.
+
+You can also write the filter like so:
+```
+someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
+```
+
+### usage example:
+```
+// create predicate factory and filter provider
+var builderFactory = new PredicateBuilderFactory();
+var provider = new FilterProvider(builderFactory);
+
+using(vad db = new SomeDbContext())
+{
+    var q = db.SomeTable.AsQueryable();
+    // apply filter
+    q = filterProvider.ApplyFilter(q, filter);
+    // materialize query
+    return q.ToArray();
+}
+
+```
+
+### supported operands and there sql equivalent
+ operands | sql equivalent 
 --- | ---|
  : | equal
  ~ | like
