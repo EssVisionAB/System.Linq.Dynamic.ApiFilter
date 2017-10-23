@@ -20,7 +20,7 @@ someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
 It is important to have a dot before the searched attribute. For clarity it can be good to use som prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
 
-### Backend usage example:
+### Backend usage simple example:
 ```
 // create predicate factory and filter provider
 var builderFactory = new PredicateBuilderFactory();
@@ -35,6 +35,16 @@ using(vad db = new SomeDbContext())
     return q.ToArray();
 }
 
+```
+
+#### The main service to use in any web app is IFilterProvider that is defined like so:
+```
+    public interface IFilterProvider
+    {
+        IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, string filters);
+
+        IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, IEnumerable<Filter> filters);
+    }
 ```
 
 ### supported operands and there sql equivalent
