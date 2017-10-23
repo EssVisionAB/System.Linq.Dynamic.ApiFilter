@@ -32,7 +32,6 @@ namespace xApiFilterTest.Db
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseInMemoryDatabase("")
                 optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=EFProviders.InMemory;Trusted_Connection=True;");
             }
         }

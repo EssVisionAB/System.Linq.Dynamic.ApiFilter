@@ -130,5 +130,21 @@ namespace xApiFilterTest
                 Assert.Equal("A", result.First().Name);
             }
         }
+
+        [Fact]
+        public void FilterBy_ResponsibleIsNull()
+        {
+            var filter = "x.responsible:null";
+
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                q = _filterProvider.ApplyFilter(q, filter);
+
+                //var result = q.ToArray();
+
+                //Assert.NotNull(result);
+            }
+        }
     }
 }
