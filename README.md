@@ -57,12 +57,12 @@ using(vad db = new SomeDbContext())
 
 ### supported operands and there sql equivalent
  operands | sql equivalent 
---- | ---|
+--- | ----------------------------------------------------------------------------------------
  : | equal
  ~ | like
  < | smaler than
  <: | smaler than or equal
  \>  | greater than
  \>: | greater than or equal
- :(a,b,c) | inclusive or queal. In Linq.Dynamic -> . Where("field == @0 || field == @1 ...")
+ :(a,b,c) | inclusive or equal. -> .Where("field == @0 || field == @1 ...")
  ; | and (combines filters)
