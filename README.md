@@ -1,6 +1,6 @@
 # System.Linq.Dynamic.ApiFilter
 
-Parse query string filter to used System.Linq.Dynamic and translated to sql. 
+Parse query string filter to be used with System.Linq.Dynamic and translated to sql. 
 
 ### Filter example1:
 ```
@@ -56,13 +56,14 @@ using(vad db = new SomeDbContext())
 ```
 
 ### supported operands and there sql equivalent
- operands | sql equivalent 
---- | ----------------------------------------------------------------------------------------
- : | equal
- ~ | like
- < | smaler than
- <: | smaler than or equal
- \>  | greater than
- \>: | greater than or equal
- :(a,b,c) | inclusive or equal. -\> .Where("field == @0 \|\| field == @1 ...")
+ operands | sql equivalent | data types
+--- | --- | ---
+ : | equal | all data types
+ ~ | like | string
+ < | smaler than | all data types exept string
+ <: | smaler than or equal | all data types exept string
+ \>  | greater than | most data all exept string
+ \>: | greater than or equal | all data types exept string
+ :(a,b,c) | inclusive or equal. -\> .Where("field == @0 \|\| field == @1 ...") | all data types
+ ~(a,b,c) | inclusive or like. -\> .Where("field.Contains(@0) \|\| field.Contains(@1)...") | string
  ; | and (combines filters)
