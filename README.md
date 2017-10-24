@@ -18,7 +18,7 @@ You can also write the filter like so:
 ```
 someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
-It is important to have a dot before the searched attribute. For clarity it can be good to use som prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
+It is important to have a dot before the searched attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
 
 The reason for using a leading dot and expecting a possible prefix is for furure use of prefix categories.
 
