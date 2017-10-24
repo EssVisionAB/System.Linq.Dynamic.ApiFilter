@@ -20,7 +20,7 @@ someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
 It is important to have a dot before the searched attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
 
-The reason for using a leading dot and expecting a possible prefix is for furure use of prefix categories.
+The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement and retained for future use of prefix categories.
 
 ### Inclusive or equal filter example:
 ```
