@@ -1,7 +1,7 @@
 # System.Linq.Dynamic.ApiFilter
 
 Portable core-level .NET class library. 
-Parses a query string filter to be used on data entities or in-memory collections. 
+Parses and applies query string filters to be used on data entities or in-memory collections. 
 
 ### Filter example1:
 ```
