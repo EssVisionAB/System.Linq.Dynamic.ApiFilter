@@ -31,8 +31,8 @@ Will return all resource wich names are 'name1', 'name2' or 'name3'.
 ### Backend simple usage example:
 ```C#
 // create predicate factory and filter provider
-var builderFactory = new PredicateBuilderFactory();
-var provider = new FilterProvider(builderFactory);
+var factory = new PredicateBuilderFactory();
+var provider = new FilterProvider(factory);
 
 using(vad db = new SomeDbContext())
 {
@@ -54,6 +54,11 @@ using(vad db = new SomeDbContext())
         IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, IEnumerable<Filter> filters);
     }
 ```
+#### The filter provider is extendable through PredicateBuilderFactory' method:
+```C#
+    public void AddBuilderType(string targetTypeName, Type builderType){...}
+```
+Where targetTypeName is the full name of the data type and builder implements IPredicateBuilder
 
 ### supported operands and there sql equivalent
  operands | sql equivalent | data types
