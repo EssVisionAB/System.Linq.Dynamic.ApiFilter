@@ -6,19 +6,19 @@ Parse query string filter to be used with System.Linq.Dynamic and translated to 
 ```
 someurl/someresource?filter=attributes.contacts.name~adam
 ```
-Will return all resources that has a contact with name containing 'adam'.
+Returns all resources that has a contact with a name containing 'adam'.
 
 ### Filter example2:
 ```
 someurl/someresource?filter=attributes.contacts.name~adam;attributes.contacts.email~com
 ```
-Will return all resources that has a contact with name containing 'adam' and email containing 'com'.
+Returns all resources that has a contact with a name containing 'adam' and an email containing 'com'.
 
 You can also write the filter like so:
 ```
 someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
-It is important to have a dot before the searched attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert. But thats up to the consuming part.
+The leading dot is mandatory before each searched attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert, but thats up to the consuming part.
 
 The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement and retained for future use of prefix categories.
 
@@ -36,19 +36,18 @@ Returns all resource wich names conatins 'a', 'b' or 'c'.
 
 ### Backend simple usage example:
 ```C#
-// create predicate factory and filter provider
+// Create the filter provider with a predicate factory
 var factory = new PredicateBuilderFactory();
 var provider = new FilterProvider(factory);
 
 using(vad db = new SomeDbContext())
 {
     var q = db.SomeTable.AsQueryable();
-    // apply query filter
+    // Apply query filter. Under the System.Linq.Dynamic is used
     q = provider.ApplyFilter(q, filters);
-    // materialize data
+    // Materialize the data
     return q.ToArray();
 }
-
 ```
 
 #### The main service to use in any web app is IFilterProvider that is defined like so:
