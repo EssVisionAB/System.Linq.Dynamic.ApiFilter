@@ -21,7 +21,8 @@ someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
 The leading dot is mandatory before each search attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someproperty or x.somepropert, but thats up to the consuming part.
 
-The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement and retained for future use of prefix categories.
+The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement 
+(filter on [JsonApi] (http://jsonapi.org/format) attributes) and retained for future use of prefix categories.
 
 ### Inclusive or equal filter example:
 ```
