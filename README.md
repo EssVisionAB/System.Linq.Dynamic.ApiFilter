@@ -1,6 +1,6 @@
 # System.Linq.Dynamic.ApiFilter
 
-Parse query string filter to be used with System.Linq.Dynamic and translated to sql. 
+Portable core-level .NET class library. Parses a query string filter to be used with System.Linq.Dynamic and translated to sql. 
 
 ### Filter example1:
 ```
