@@ -54,11 +54,11 @@ using(vad db = new SomeDbContext())
         IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, IEnumerable<Filter> filters);
     }
 ```
-#### The filter provider is extendable through PredicateBuilderFactory' method:
+#### The filter provider is extendable through the PredicateBuilderFactory's method:
 ```C#
     public void AddBuilderType(string targetTypeName, Type builderType){...}
 ```
-Where targetTypeName is the full name of the data type and builder implements IPredicateBuilder
+Where targetTypeName is the full name of the data type and builderType is an implementation of IPredicateBuilder
 
 ### supported operands and there sql equivalent
  operands | sql equivalent | data types
