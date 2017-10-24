@@ -24,9 +24,9 @@ The reason for using a leading dot and expecting a possible prefix is for furure
 
 ### Inclusive or filter example:
 ```
-someurl/someresource?filter=attributes.name:(name1, name2, name3)
+someurl/someresource?filter=attributes.name:(a, b, c)
 ```
-Will return all resource wich names are 'name1', 'name2' or 'name3'.
+Will return all resource wich names are 'a', 'b' or 'c'.
 
 ### Backend simple usage example:
 ```C#
