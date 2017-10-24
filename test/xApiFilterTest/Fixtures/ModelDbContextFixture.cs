@@ -15,9 +15,9 @@ namespace xApiFilterTest.Fixtures
 
             using (var db = new Db.ModelDbContext(Options))
             {
-                db.Models.Add(new Db.Model { Id = 1, Name = "A", RegisteredDate = DateTime.Parse("2017-01-01"), ResponsibleId = 1 });
-                db.Models.Add(new Db.Model { Id = 2, Name = "B", ResponsibleId = 2 });
-                db.Models.Add(new Db.Model { Id = 3, Name = "C" });
+                db.Models.Add(new Db.Model { Id = 1, Name = "AAA", RegisteredDate = DateTime.Parse("2017-01-01"), ResponsibleId = 1 });
+                db.Models.Add(new Db.Model { Id = 2, Name = "BBB", ResponsibleId = 2 });
+                db.Models.Add(new Db.Model { Id = 3, Name = "CCC" });
 
                 db.Users.Add(new Db.User { Id = 1, Name = "Kalle", Email = "kalle@com.se" });
                 db.Users.Add(new Db.User { Id = 2, Name = "Olle", Email = "olle@com.se" });

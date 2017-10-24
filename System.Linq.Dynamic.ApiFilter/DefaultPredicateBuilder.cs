@@ -9,7 +9,7 @@
         private const string SmallerThanPredicateFormat = "null != {0} && {0} < @0";
         private const string SmallerThanOrEqualsPredicateFormat = "null != {0} && {0} <= @0";
 
-        private const string InclusiveOrPredicateFormat = "{0} == {1}";
+        private const string InclusiveOrEqualPredicateFormat = "{0} == {1}";
 
 
         public DefaultPredicateBuilder(Filter filter) : base(filter)
@@ -31,7 +31,7 @@
                 case Filter.Operands.SmallerThanOrEqual:
                     return string.Format(SmallerThanOrEqualsPredicateFormat, property);
 
-                case Filter.Operands.InclusiveOr:
+                case Filter.Operands.InclusiveOrEqual:
 
                     var result = "";
                     for (int i = 0; i < values.Length; i++)
@@ -41,7 +41,7 @@
                             result += " || ";
                         }
 
-                        result += string.Format(InclusiveOrPredicateFormat, "@" + i.ToString(), property);
+                        result += string.Format(InclusiveOrEqualPredicateFormat, "@" + i.ToString(), property);
                     }
                     return result;
 

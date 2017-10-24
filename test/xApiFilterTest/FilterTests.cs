@@ -39,7 +39,7 @@ namespace xApiFilterTest
             var filter = Filter.Parse(filterString).First();
 
             Assert.Equal("name", filter.Name);
-            Assert.Equal(Filter.Operands.InclusiveOr, filter.Operand);
+            Assert.Equal(Filter.Operands.InclusiveOrEqual, filter.Operand);
             Assert.Equal(2, filter.Values.Length);
             Assert.Equal("a", filter.Values[0]);
             Assert.Equal("b", filter.Values[1]);

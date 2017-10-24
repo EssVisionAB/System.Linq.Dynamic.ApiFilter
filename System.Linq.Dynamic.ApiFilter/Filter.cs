@@ -13,8 +13,10 @@ namespace System.Linq.Dynamic.ApiFilter
             public const string GreaterThanOrEqual = ">:";
             public const string SmallerThan = "<";
             public const string SmallerThanOrEqual = "<:";
-            // special case. Inclusive or. filed:(value1, value2 ...) eg Where("name.Equals(value1) || name.Equals(value2) ...")
-            public const string InclusiveOr = ":()";
+            // special case. Inclusive or equal. field:(value1, value2 ...). In Linq.Dynamic -> . Where("field == @0 || field == @1 ...")
+            public const string InclusiveOrEqual = ":()";
+            // special case. Inclusive or like. field:(value1, value2 ...). In Linq.Dynamic -> .Where("field.Contains(@0) || field.Contains(@1) ...")
+            public const string InclusiveOrLike = "~()";
         }
 
         private const char apostrohpe = '\'';
@@ -41,10 +43,22 @@ namespace System.Linq.Dynamic.ApiFilter
             foreach (var filter in parts)
             {
                 var op = GetOperand(filter);
-                if (op == Operands.InclusiveOr)
+                if (op == Operands.InclusiveOrEqual)
                 {
                     // NOTE: special case
                     var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.RemoveEmptyEntries);
+                    var name = RemoveAttributesPrefix(args[0]);
+                    var values = args[1].Split(',')
+                                    .Select(s => s.Trim())
+                                    .Select(s => RemoveApostrophes(s))
+                                    .ToArray();
+
+                    result.Add(new Filter(name, op, values));
+                }
+                else if(op == Operands.InclusiveOrLike)
+                {
+                    // NOTE: special case
+                    var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.RemoveEmptyEntries);
                     var name = RemoveAttributesPrefix(args[0]);
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
@@ -92,7 +106,12 @@ namespace System.Linq.Dynamic.ApiFilter
             if (filter.IndexOf(":(") > 0 && filter.LastIndexOf(")") == filter.Length - 1)
             {
                 // NOTE: special case
-                return Operands.InclusiveOr;
+                return Operands.InclusiveOrEqual;
+            }
+            if (filter.IndexOf("~(") > 0 && filter.LastIndexOf(")") == filter.Length - 1)
+            {
+                // NOTE: special case
+                return Operands.InclusiveOrLike;
             }
 
             foreach (var op in _operands)

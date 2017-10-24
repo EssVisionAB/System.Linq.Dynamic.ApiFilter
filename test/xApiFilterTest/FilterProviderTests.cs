@@ -39,15 +39,33 @@ namespace xApiFilterTest
         }
 
         [Fact]
-        public void FilterBy_Name_InclusiveOr()
+        public void FilterBy_Name_InclusiveOrEqual()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.name:(A,B,C)";
+            var filter = "x.name:(AAA,BBB,CCC)";
 
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
                 q = _filterProvider.ApplyFilter(q, filter);
+
+                var result = q.ToArray();
+
+                Assert.NotNull(result);
+                Assert.Equal(3, result.Length);
+            }
+        }
+
+        [Fact]
+        public void FilterBy_Name_InclusiveOrLike()
+        {
+            // NOTE: we are using in-memory-db so it's case sensitive
+            var filter = "x.name~(A,B,C)";
+            var filters = Filter.Parse(filter);
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                q = _filterProvider.ApplyFilter(q, filters);
 
                 var result = q.ToArray();
 
@@ -72,7 +90,7 @@ namespace xApiFilterTest
 
                 Assert.NotNull(result);
                 Assert.Equal(1, result.Length);
-                Assert.Equal("B", result.First().Name);
+                Assert.Equal("BBB", result.First().Name);
             }
         }
 
@@ -91,7 +109,7 @@ namespace xApiFilterTest
 
                 Assert.NotNull(result);
                 Assert.Equal(1, result.Length);
-                Assert.Equal("A", result.First().Name);
+                Assert.Equal("AAA", result.First().Name);
             }
         }
 
@@ -127,11 +145,11 @@ namespace xApiFilterTest
 
                 Assert.NotNull(result);
                 Assert.Equal(1, result.Length);
-                Assert.Equal("A", result.First().Name);
+                Assert.Equal("AAA", result.First().Name);
             }
         }
 
-        [Fact]
+        //[Fact]
         public void FilterBy_ResponsibleIsNull()
         {
             var filter = "x.responsible:null";

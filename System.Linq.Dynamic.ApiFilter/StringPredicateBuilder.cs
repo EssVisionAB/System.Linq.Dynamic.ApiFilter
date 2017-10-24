@@ -6,7 +6,8 @@
         private const string __LikePredicateFormat = "{0}.Contains(@0)";
         private const string __EqualsPredicateFormat = "{0} == @0";
 
-        private const string __InclusiveOrPredicateFormat = "{0} == {1}";
+        private const string __InclusiveOrEqualPredicateFormat = "{0} == {1}";
+        private const string __InclusiveOrLikePredicateFormat = "{1}.Contains({0})";
 
 
         protected virtual string LikePredicateFormat
@@ -19,11 +20,15 @@
             get { return __EqualsPredicateFormat; }
         }
 
-        protected virtual string InclusiveOrPredicateFormat
+        protected virtual string InclusiveOrEqualPredicateFormat
         {
-            get { return __InclusiveOrPredicateFormat; }
+            get { return __InclusiveOrEqualPredicateFormat; }
         }
 
+        protected virtual string InclusiveOrLikePredicateFormat
+        {
+            get { return __InclusiveOrLikePredicateFormat; }
+        }
 
         public StringPredicateBuilder(Filter filter) : base(filter)
         {
@@ -40,19 +45,34 @@
                 case Filter.Operands.Equal:
                     return string.Format(EqualsPredicateFormat, property, property.NullPropName());
 
-                case Filter.Operands.InclusiveOr:
-
-                    var result = "";
-                    for (int i = 0; i < values.Length; i++)
+                case Filter.Operands.InclusiveOrEqual:
                     {
-                        if (i > 0)
+                        var result = "";
+                        for (int i = 0; i < values.Length; i++)
                         {
-                            result += " || ";
-                        }
+                            if (i > 0)
+                            {
+                                result += " || ";
+                            }
 
-                        result += string.Format(InclusiveOrPredicateFormat, "@" + i.ToString(), property);
+                            result += string.Format(InclusiveOrEqualPredicateFormat, "@" + i.ToString(), property);
+                        }
+                        return result;
                     }
-                    return result;
+                case Filter.Operands.InclusiveOrLike:
+                    {
+                        var result = "";
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            if (i > 0)
+                            {
+                                result += " || ";
+                            }
+
+                            result += string.Format(InclusiveOrLikePredicateFormat, "@" + i.ToString(), property);
+                        }
+                        return result;
+                    }
 
                 default:
                     throw new NotSupportedException(op);
