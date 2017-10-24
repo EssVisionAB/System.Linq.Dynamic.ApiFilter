@@ -9,11 +9,11 @@ namespace xApiFilterTest.Fixtures
     {
         public ModelDbContextFixture()
         {
-            Options = new DbContextOptionsBuilder<Db.ModelDbContext>()
+            var options = new DbContextOptionsBuilder<Db.ModelDbContext>()
                   .UseInMemoryDatabase("In mem db")
                   .Options;
 
-            using (var db = new Db.ModelDbContext(Options))
+            using (var db = new Db.ModelDbContext(options))
             {
                 db.Models.Add(new Db.Model { Id = 1, Name = "AAA", RegisteredDate = DateTime.Parse("2017-01-01"), ResponsibleId = 1 });
                 db.Models.Add(new Db.Model { Id = 2, Name = "BBB", ResponsibleId = 2 });
@@ -22,12 +22,14 @@ namespace xApiFilterTest.Fixtures
                 db.Users.Add(new Db.User { Id = 1, Name = "Kalle", Email = "kalle@com.se" });
                 db.Users.Add(new Db.User { Id = 2, Name = "Olle", Email = "olle@com.se" });
 
-                db.Contacts.Add(new Db.Contact { Id = 1, ModelId = 1, Name = "Rosanna", Address = "Jupiter" });
-                db.Contacts.Add(new Db.Contact { Id = 2, ModelId = 2, Name = "Margot", Address = "Mars" });
+                db.Contacts.Add(new Db.Contact { Id = 1, ModelId = 1, Name = "Rosanna", Address = "Mars" });
+                db.Contacts.Add(new Db.Contact { Id = 2, ModelId = 2, Name = "Margot", Address = "Venus" });
                 db.Contacts.Add(new Db.Contact { Id = 3, ModelId = 2, Name = "Gudrun", Address = "Moon" });
 
                 db.SaveChanges();
             }
+
+            Options = options;
         }
 
         public DbContextOptions<Db.ModelDbContext> Options { get; }

@@ -12,11 +12,7 @@ namespace System.Linq.Dynamic.ApiFilter
 
         protected PredicateBuilder(Filter filter)
         {
-            if (null == filter)
-                throw new ArgumentNullException(nameof(filter));
-
-
-            Filter = filter;
+            Filter = filter ?? throw new ArgumentNullException(nameof(filter));
         }
 
 
@@ -33,7 +29,7 @@ namespace System.Linq.Dynamic.ApiFilter
                     // we only support 2 levels on array elements
                     if (propArray.Length != 2)
                         // TODO: custom exception
-                        throw new DynamicFilterException("Ogiltig argument längd.");
+                        throw new DynamicFilterException(Properties.Resources.UnsupportedArrayArgLength);
 
                     propName = propArray[1];
                     result = string.Format(ArrayPredicateFormat, propArray[0], GetPropertyFormat(propName, op, values));

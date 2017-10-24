@@ -61,7 +61,7 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Egenskapen &apos;{0}&apos; finns inte på det sökta objektet..
+        ///   Looks up a localized string similar to Property &apos;{0}&apos; is not a member of the taget entity..
         /// </summary>
         internal static string InvalidFilterAttributeException {
             get {
@@ -70,7 +70,7 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtret saknar giltig operand..
+        ///   Looks up a localized string similar to Usupported filter operand..
         /// </summary>
         internal static string MissingOperandException {
             get {
@@ -79,7 +79,7 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operanden &apos;{0}&apos; stöds inte för egenskapen &apos;{1}&apos;..
+        ///   Looks up a localized string similar to The operand &apos;{0}&apos; is not supported for property &apos;{1}&apos;..
         /// </summary>
         internal static string OperandForAttributeNotSupportedException {
             get {
@@ -88,11 +88,11 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operanden &apos;{0}&apos; stöds inte för data typen..
+        ///   Looks up a localized string similar to Unsupporter array argument lengt..
         /// </summary>
-        internal static string OperandNotSupportedException {
+        internal static string UnsupportedArrayArgLength {
             get {
-                return ResourceManager.GetString("OperandNotSupportedException", resourceCulture);
+                return ResourceManager.GetString("UnsupportedArrayArgLength", resourceCulture);
             }
         }
     }

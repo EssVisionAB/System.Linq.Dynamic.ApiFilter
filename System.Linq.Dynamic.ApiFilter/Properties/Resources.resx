@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InvalidFilterAttributeException" xml:space="preserve">
-    <value>Egenskapen '{0}' finns inte på det sökta objektet.</value>
+    <value>Property '{0}' is not a member of the taget entity.</value>
   </data>
   <data name="MissingOperandException" xml:space="preserve">
-    <value>Filtret saknar giltig operand.</value>
+    <value>Usupported filter operand.</value>
   </data>
   <data name="OperandForAttributeNotSupportedException" xml:space="preserve">
-    <value>Operanden '{0}' stöds inte för egenskapen '{1}'.</value>
+    <value>The operand '{0}' is not supported for property '{1}'.</value>
   </data>
-  <data name="OperandNotSupportedException" xml:space="preserve">
-    <value>Operanden '{0}' stöds inte för data typen.</value>
+  <data name="UnsupportedArrayArgLength" xml:space="preserve">
+    <value>Unsupporter array argument lengt.</value>
   </data>
 </root>

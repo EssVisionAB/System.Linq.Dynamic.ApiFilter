@@ -53,8 +53,9 @@ namespace xApiFilterTest
             // Act
             var ex = Assert.Throws<DynamicFilterException>(() => Filter.Parse(filterString));
 
-            Assert.Equal("Filtret saknar giltig operand.", ex.Message);
+            Assert.Equal("Usupported filter operand.", ex.Message);
 
         }
+
     }
 }

@@ -43,7 +43,6 @@ namespace xApiFilterTest
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.name:(AAA,BBB,CCC)";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -61,11 +60,10 @@ namespace xApiFilterTest
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.name~(A,B,C)";
-            var filters = Filter.Parse(filter);
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
-                q = _filterProvider.ApplyFilter(q, filters);
+                q = _filterProvider.ApplyFilter(q, filter);
 
                 var result = q.ToArray();
 
@@ -80,7 +78,6 @@ namespace xApiFilterTest
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.contacts.name~Gud";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -99,7 +96,6 @@ namespace xApiFilterTest
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.responsible.name:Kalle;x.responsible.email~com";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -118,7 +114,6 @@ namespace xApiFilterTest
         {
             // NOTE: we are using in-memory-db so it's case sensitive
             var filter = "x.responsible.name:(Kalle, Olle)";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -135,7 +130,6 @@ namespace xApiFilterTest
         public void FilterBy_RegisteredDate_GreaterThanOrEqual()
         {
             var filter = "x.registereddate>:2016-12-30";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -152,16 +146,41 @@ namespace xApiFilterTest
         //[Fact]
         public void FilterBy_ResponsibleIsNull()
         {
+            // TODO: handle filter on null values
             var filter = "x.responsible:null";
-
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
                 q = _filterProvider.ApplyFilter(q, filter);
+            }
+        }
 
-                //var result = q.ToArray();
 
-                //Assert.NotNull(result);
+        [Fact]
+        public void InvalidFilterAttributeException()
+        {
+            var filter = "x.description~test";
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                // Act
+                var ex = Assert.Throws<DynamicFilterException>(() => _filterProvider.ApplyFilter(q, filter));
+
+                Assert.Equal("Property 'description' is not a member of the taget entity.", ex.Message);
+            }
+        }
+
+        [Fact]
+        public void OperandForAttributeNotSupportedException()
+        {
+            var filter = "x.name>:test";
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                // Act
+                var ex = Assert.Throws<DynamicFilterException>(() => _filterProvider.ApplyFilter(q, filter));
+
+                Assert.Equal("The operand '>:' is not supported for property 'name'.", ex.Message);
             }
         }
     }
