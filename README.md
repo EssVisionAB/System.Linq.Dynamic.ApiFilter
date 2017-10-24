@@ -59,9 +59,10 @@ using(vad db = new SomeDbContext())
         IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, IEnumerable<Filter> filters);
     }
 ```
-#### Filter provider is extendable through the PredicateBuilderFactory's method:
+#### Filter provider is extendable through PredicateBuilderFactory's method AddBuilderType: 
 ```C#
     public void AddBuilderType(string targetTypeName, Type builderType){...}
+    public void AddBuilderType<T>(string targetTypeName){...}
 ```
 Where targetTypeName is the fullname of the data type and builderType is an implementation of IPredicateBuilder extending abstract PredicateBuilder<TEntity> class.
 
