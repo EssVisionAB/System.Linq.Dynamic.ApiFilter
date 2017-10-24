@@ -62,7 +62,7 @@ using(vad db = new SomeDbContext())
 #### Filter provider is extendable through PredicateBuilderFactory's method AddBuilderType: 
 ```C#
     public void AddBuilderType(string targetTypeName, Type builderType){...}
-    public void AddBuilderType\<T>(string targetTypeName){...}
+    public void AddBuilderType<T>(string targetTypeName){...}
 ```
 Where targetTypeName is the fullname of the data type and builderType is an implementation of IPredicateBuilder extending the abstract PredicateBuilder\<TEntity> base class.
 
