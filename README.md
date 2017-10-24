@@ -64,5 +64,5 @@ using(vad db = new SomeDbContext())
  <: | smaler than or equal
  \>  | greater than
  \>: | greater than or equal
- :(a,b,c) | inclusive or queal (WHERE (@0='a' OR @0='b' OR @0='c'))
+ :(a,b,c) | inclusive or queal (WHERE(SomeColumn=@0 OR SomeColumn=@1 OR ...))
  ; | and (combines filters)
