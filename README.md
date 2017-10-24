@@ -22,11 +22,16 @@ It is important to have a dot before the searched attribute. For clarity it can 
 
 The reason for using a leading dot and expecting a possible prefix is for furure use of prefix categories.
 
-### Inclusive or filter example:
+### Inclusive or equal filter example:
 ```
 someurl/someresource?filter=attributes.name:(a, b, c)
 ```
 Will return all resource wich names are 'a', 'b' or 'c'.
+### Inclusive or like filter example:
+```
+someurl/someresource?filter=attributes.name~(a, b, c)
+```
+Will return all resource wich names conatins 'a', 'b' or 'c'.
 
 ### Backend simple usage example:
 ```C#
