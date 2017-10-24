@@ -36,7 +36,7 @@ using(vad db = new SomeDbContext())
 {
     var q = db.SomeTable.AsQueryable();
     // apply query filter
-    q = filterProvider.ApplyFilter(q, filters);
+    q = provider.ApplyFilter(q, filters);
     // materialize data
     return q.ToArray();
 }
