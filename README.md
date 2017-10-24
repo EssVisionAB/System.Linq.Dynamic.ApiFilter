@@ -45,7 +45,7 @@ using(vad db = new SomeDbContext())
 {
     var q = db.SomeTable.AsQueryable();
     // Apply query filters. Under the hood System.Linq.Dynamic is used
-    q = provider.ApplyFilter(q, filters);
+    q = provider.ApplyFilter(q, filter);
     // Materialize the data
     return q.ToArray();
 }
