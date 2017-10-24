@@ -73,7 +73,7 @@ Where targetTypeName is the fullname of the data type and builderType is an impl
  ~ | like | string
  < | smaler than | all data types exept string
  <: | smaler than or equal | all data types exept string
- \>  | greater than | most data all exept string
+ \>  | greater than | all data types exept string
  \>: | greater than or equal | all data types exept string
  :(a,b,c) | inclusive or equal. -\> .Where("field == @0 \|\| field == @1 ...") | all data types
  ~(a,b,c) | inclusive or like. -\> .Where("field.Contains(@0) \|\| field.Contains(@1)...") | string
