@@ -27,7 +27,7 @@ someurl/someresource?filter=attributes.name:(name1, name2, name3)
 Will return all resource wich names are 'name1', 'name2' or 'name3'.
 
 ### Backend simple usage example:
-```
+```C#
 // create predicate factory and filter provider
 var builderFactory = new PredicateBuilderFactory();
 var provider = new FilterProvider(builderFactory);
@@ -36,7 +36,7 @@ using(vad db = new SomeDbContext())
 {
     var q = db.SomeTable.AsQueryable();
     // apply query filter
-    q = filterProvider.ApplyFilter(q, filter);
+    q = filterProvider.ApplyFilter(q, filters);
     // materialize data
     return q.ToArray();
 }
@@ -44,7 +44,7 @@ using(vad db = new SomeDbContext())
 ```
 
 #### The main service to use in any web app is IFilterProvider that is defined like so:
-```
+```C#
     public interface IFilterProvider
     {
         IQueryable<TEntity> ApplyFilter<TEntity>(IQueryable<TEntity> query, string filters);
