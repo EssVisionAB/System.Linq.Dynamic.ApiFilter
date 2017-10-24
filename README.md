@@ -18,7 +18,7 @@ You can also write the filter like so:
 ```
 someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
 ```
-The leading dot is mandatory before each searched attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert, but thats up to the consuming part.
+The leading dot is mandatory before each search attribute. For clarity it can be good to use a prefix before the first dot, like attributes.someptoperty or x.somepropert, but thats up to the consuming part.
 
 The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement and retained for future use of prefix categories.
 
