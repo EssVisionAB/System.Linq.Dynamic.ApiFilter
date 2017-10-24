@@ -43,7 +43,7 @@ var provider = new FilterProvider(factory);
 using(vad db = new SomeDbContext())
 {
     var q = db.SomeTable.AsQueryable();
-    // Apply query filters. Under the System.Linq.Dynamic is used
+    // Apply query filters. Under the hood System.Linq.Dynamic is used
     q = provider.ApplyFilter(q, filters);
     // Materialize the data
     return q.ToArray();
