@@ -34,7 +34,7 @@ Returns all resource wich names are 'a', 'b' or 'c'.
 ```
 someurl/someresource?filter=attributes.name~(a, b, c)
 ```
-Returns all resource wich names conatins 'a', 'b' or 'c'.
+Returns all resource wich names contains 'a', 'b' or 'c'.
 
 ### Backend simple usage example:
 ```C#
@@ -72,8 +72,8 @@ Where targetTypeName is the fullname of the data type and builderType is an impl
 --- | --- | ---
  : | equal | all data types
  ~ | like | string
- < | smaler than | all data types exept string
- <: | smaler than or equal | all data types exept string
+ < | smaller than | all data types exept string
+ <: | smaller than or equal | all data types exept string
  \>  | greater than | all data types exept string
  \>: | greater than or equal | all data types exept string
  :(a,b...) | inclusive or equal. -\> q.Where("field == @0 \|\| field == @1 ...") | all data types
