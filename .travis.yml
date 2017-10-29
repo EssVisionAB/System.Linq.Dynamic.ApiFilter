@@ -1,1 +1,2 @@
-
+language: csharp
+solution: System.Linq.Dynamic.ApiFilter.sln
