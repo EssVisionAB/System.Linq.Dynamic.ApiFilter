@@ -1,10 +1,8 @@
-image: Visual Studio 2017
 language: csharp
-solution: System.Linq.Dynamic.ApiFilter.sln
-
-before_build:
-- nuget restore
-
-build:
-  project: System.Linq.Dynamic.ApiFilter.sln
-  verbosity: minimal
+dist: trusty
+mono: none
+dotnet: 1.0.1
+install:
+- dotnet restore
+script:
+- dotnet build
