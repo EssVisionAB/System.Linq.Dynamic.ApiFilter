@@ -8,3 +8,4 @@ script:
   - cd System.Linq.Dynamic.ApiFilter
   - dotnet restore
   - dotnet build -c Release
+  - dotnet test test/xApiFilterTest/xApiFilterTest.csproj
