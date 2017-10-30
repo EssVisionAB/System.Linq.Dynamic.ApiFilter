@@ -1,9 +1,2 @@
 language: csharp
-dist: trusty
-mono: 5.2.0
-dotnet: 2.0.0
-install:
-- dotnet restore
-- nuget install xunit.runner.console -version 2.2.0
-script:
-- dotnet build
+sudo: required
