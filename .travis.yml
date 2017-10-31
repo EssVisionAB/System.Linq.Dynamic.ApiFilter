@@ -1,3 +1,11 @@
+dist: trusty
+sudo: required
 language: csharp
+mono: none
 dotnet: 2.0.0
 solution: System.Linq.Dynamic.ApiFilter.sln
+script:
+  - cd System.Linq.Dynamic.ApiFilter
+  - dotnet restore
+  - dotnet build -c Release
+  - dotnet test ../test/xApiFilterTest/xApiFilterTest.csproj
