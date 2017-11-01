@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>System.Linq.Dynamic.ApiFilter</id>
+    <version>1.0.0</version>
+    <title>System.Linq.Dynamic.ApiFilter</title>
+    <authors>theblomskog</authors>
+    <owners>theblomskog</owners>
+    <licenseUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Portable core-level .NET class library. Parses and applies query string filters to be used on data entities or in-memory collections</description>
+    <copyright>Copyright © 2017 Tommy Blomskog</copyright>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Linq.Dynamic.Core" version="1.0.7.9" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
