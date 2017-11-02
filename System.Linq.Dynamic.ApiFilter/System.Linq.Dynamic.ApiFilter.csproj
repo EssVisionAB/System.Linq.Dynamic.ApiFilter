@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
