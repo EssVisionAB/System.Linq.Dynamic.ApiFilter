@@ -47,7 +47,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 {
                     // NOTE: special case
                     var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.RemoveEmptyEntries);
-                    var name = RemoveAttributesPrefix(args[0]);
+                    var name = args[0];
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
                                     .Select(s => RemoveApostrophes(s))
@@ -59,7 +59,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 {
                     // NOTE: special case
                     var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.RemoveEmptyEntries);
-                    var name = RemoveAttributesPrefix(args[0]);
+                    var name = args[0];
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
                                     .Select(s => RemoveApostrophes(s))
@@ -70,7 +70,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 else
                 {
                     var args = filter.Split(new string[] { op }, StringSplitOptions.RemoveEmptyEntries);
-                    var name = RemoveAttributesPrefix(args[0]);                    
+                    var name = args[0];                    
                     var value = RemoveApostrophes(args[1]);
 
                     result.Add(new Filter(name, op, value));
@@ -91,13 +91,6 @@ namespace System.Linq.Dynamic.ApiFilter
                 value = value.Substring(0, value.Length - 1);
             }
             return value;
-        }
-
-        // NOTE: filter=attributes.name:'some value'
-        // Remove first name entry (eg attributes)
-        static string RemoveAttributesPrefix(string value)
-        {
-            return value.Substring(value.IndexOf('.') + 1);
         }
 
         static string GetOperand(string filter)

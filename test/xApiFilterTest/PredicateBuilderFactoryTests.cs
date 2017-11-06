@@ -16,7 +16,7 @@ namespace xApiFilterTest
             var factory = new PredicateBuilderFactory();
             factory.AddBuilderType(typeof(string).FullName, typeof(StringPredicateBuilder<>));
 
-            var filter = Filter.Parse("attributes.name:'test'").First();
+            var filter = Filter.Parse("name:'test'").First();
             var builder = factory.Create<Model>(filter);
 
             Assert.IsType<StringPredicateBuilder<Model>>(builder);
