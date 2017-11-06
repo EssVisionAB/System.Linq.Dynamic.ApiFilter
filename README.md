@@ -5,36 +5,39 @@ Parses and applies query string filters to be used on data entities or in-memory
 
 ### Filter example1:
 ```
-someurl/someresource?filter=attributes.contacts.name~adam
+http://example.com/documents?filter=contacts.name~adam
 ```
-Returns all resources that has a contact with a name containing 'adam'.
+Filter for document resources that has a name containing 'adam'.
 
 ### Filter example2:
 ```
-someurl/someresource?filter=attributes.contacts.name~adam;attributes.contacts.email~com
+http://example.com/documents?filter=contacts.name~adam;contacts.email~com
 ```
-Returns all resources that has a contact with a name containing 'adam' and an email containing 'com'.
+Filter for document resources that has a contact with a name containing 'adam' and an email containing 'com'.
 
-You can also write the filter like so:
+### Special case example1
 ```
-someurl/someresource?filter=.contacts.name~adam;.contacts.email~com
+http://example.com/documents?filter=folderid:{guid}
 ```
-The leading dot is mandatory before each search attribute. For clarity it can be good to use a prefix before the first dot, like 'attributes.someproperty' or 'x.someproperty', but thats up to the consuming part.
+Filter for documents directly in specified folder
 
-The reason for using a leading dot and expecting a possible prefix is based on an earlier requirement 
-(filter on [JsonApi](http://jsonapi.org/format) attributes) and retained for future use of prefix categories.
+### Special case example2
+```
+http://example.com/documents?filter=folderid~{guid}
+```
+Filter for documents in specified folder and its children
 
 ### Inclusive or equal filter example:
 ```
-someurl/someresource?filter=attributes.name:(a, b, c)
+http://example.com/documents?filter=name:(a, b, c)
 ```
-Returns all resource wich names are 'a', 'b' or 'c'.
+Filter for document resources wich names are 'a', 'b' or 'c'.
 
 ### Inclusive or like filter example:
 ```
-someurl/someresource?filter=attributes.name~(a, b, c)
+http://example.com/documents?filter=name~(a, b, c)
 ```
-Returns all resource wich names contains 'a', 'b' or 'c'.
+Filter for document resources wich names contains 'a', 'b' or 'c'.
 
 ### Backend simple usage example:
 ```C#
