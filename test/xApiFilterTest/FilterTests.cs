@@ -12,7 +12,7 @@ namespace xApiFilterTest
         [Fact]
         public void StringEqualFilter()
         {
-            var filterString = "attributes.contact.name:'berit'";
+            var filterString = "contact.name:'berit'";
             var filter = Filter.Parse(filterString).First();
 
             Assert.Equal("contact.name", filter.Name);
@@ -24,7 +24,7 @@ namespace xApiFilterTest
         [Fact]
         public void DateGreaterThanOrEqualFilter()
         {
-            var filterString = "attributes.date>:'2017-01-01'";
+            var filterString = "date>:'2017-01-01'";
             var filter = Filter.Parse(filterString).First();
 
             Assert.Equal("date", filter.Name);
@@ -35,7 +35,7 @@ namespace xApiFilterTest
         [Fact]
         public void InclusiveOrFilter()
         {
-            var filterString = "attributes.name:('a','b')";
+            var filterString = "name:('a','b')";
             var filter = Filter.Parse(filterString).First();
 
             Assert.Equal("name", filter.Name);
@@ -48,7 +48,7 @@ namespace xApiFilterTest
         [Fact]
         public void MissingOperandException()
         {
-            var filterString = "attributes.date+'2017-01-01'";
+            var filterString = "date+'2017-01-01'";
 
             // Act
             var ex = Assert.Throws<DynamicFilterException>(() => Filter.Parse(filterString));

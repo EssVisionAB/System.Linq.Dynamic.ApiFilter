@@ -42,7 +42,7 @@ namespace xApiFilterTest
         public void FilterBy_Name_InclusiveOrEqual()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.name:(AAA,BBB,CCC)";
+            var filter = "name:(AAA,BBB,CCC)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -59,7 +59,7 @@ namespace xApiFilterTest
         public void FilterBy_Name_InclusiveOrLike()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.name~(A,B,C)";
+            var filter = "name~(A,B,C)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -77,7 +77,7 @@ namespace xApiFilterTest
         public void FilterBy_Contacts_Like()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.contacts.name~Gud";
+            var filter = "contacts.name~Gud";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -95,7 +95,7 @@ namespace xApiFilterTest
         public void FilterBy_Responsible_Equal_Like()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.responsible.name:Kalle;x.responsible.email~com";
+            var filter = "responsible.name:Kalle;responsible.email~com";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -113,7 +113,7 @@ namespace xApiFilterTest
         public void FilterBy_Responsible_InclusiveOr()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "x.responsible.name:(Kalle, Olle)";
+            var filter = "responsible.name:(Kalle, Olle)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -129,7 +129,7 @@ namespace xApiFilterTest
         [Fact]
         public void FilterBy_RegisteredDate_GreaterThanOrEqual()
         {
-            var filter = "x.registereddate>:2016-12-30";
+            var filter = "registereddate>:2016-12-30";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -147,7 +147,7 @@ namespace xApiFilterTest
         public void FilterBy_ResponsibleIsNull()
         {
             // TODO: handle filter on null values
-            var filter = "x.responsible:null";
+            var filter = "responsible:null";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -159,7 +159,7 @@ namespace xApiFilterTest
         [Fact]
         public void InvalidFilterAttributeException()
         {
-            var filter = "x.description~test";
+            var filter = "description~test";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -173,7 +173,7 @@ namespace xApiFilterTest
         [Fact]
         public void OperandForAttributeNotSupportedException()
         {
-            var filter = "x.name>:test";
+            var filter = "name>:test";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
