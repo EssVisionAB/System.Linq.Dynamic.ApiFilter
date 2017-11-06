@@ -5,7 +5,7 @@
     <PackageId>System.Linq.Dynamic.ApiFilter</PackageId>
     <Product>System.Linq.Dynamic.ApiFilter</Product>
     <Title>System.Linq.Dynamic.ApiFilter</Title>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.1</PackageVersion>
     <Authors>theblomskog</Authors>
     <Description>Portable core-level .NET class library. Parses and applies query string filters to be used on data entities or in-memory collections</Description>
     <Copyright>Copyright © 2017 Tommy Blomskog</Copyright>
