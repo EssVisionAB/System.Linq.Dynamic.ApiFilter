@@ -9,8 +9,8 @@
     <Authors>theblomskog</Authors>
     <Description>Portable core-level .NET class library. Parses and applies query string filters to be used on data entities or in-memory collections</Description>
     <Copyright>Copyright © 2017 Tommy Blomskog</Copyright>
-    <PackageProjectUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/theblomskog/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.0.2</Version>
