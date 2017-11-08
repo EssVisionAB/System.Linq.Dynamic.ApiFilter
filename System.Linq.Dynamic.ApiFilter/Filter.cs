@@ -42,7 +42,7 @@ namespace System.Linq.Dynamic.ApiFilter
         public static List<Filter> Parse(string filterValues)
         {
             var result = new List<Filter>();
-            var parts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.None) ?? new string[0];
+            var parts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
             foreach (var filter in parts)
             {
                 var op = GetOperand(filter);
