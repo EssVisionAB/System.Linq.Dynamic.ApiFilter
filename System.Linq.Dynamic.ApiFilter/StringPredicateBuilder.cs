@@ -5,6 +5,7 @@
 
         private const string __LikePredicateFormat = "{0}.Contains(@0)";
         private const string __EqualsPredicateFormat = "{0} == @0";
+        private const string __NotEqualsPredicateFormat = "{0} != @0";
 
         private const string __InclusiveOrEqualPredicateFormat = "{0} == {1}";
         private const string __InclusiveOrLikePredicateFormat = "{1}.Contains({0})";
@@ -18,6 +19,11 @@
         protected virtual string EqualsPredicateFormat
         {
             get { return __EqualsPredicateFormat; }
+        }
+
+        protected virtual string NotEqualsPredicateFormat
+        {
+            get { return __NotEqualsPredicateFormat; }
         }
 
         protected virtual string InclusiveOrEqualPredicateFormat
@@ -40,10 +46,13 @@
             switch (op)
             {
                 case Filter.Operands.Like:
-                    return string.Format(LikePredicateFormat, property, property.NullPropName());
+                    return string.Format(LikePredicateFormat, property);
 
                 case Filter.Operands.Equal:
-                    return string.Format(EqualsPredicateFormat, property, property.NullPropName());
+                    return string.Format(EqualsPredicateFormat, property);
+
+                case Filter.Operands.NotEqual:
+                    return string.Format(NotEqualsPredicateFormat, property);
 
                 case Filter.Operands.InclusiveOrEqual:
                     {

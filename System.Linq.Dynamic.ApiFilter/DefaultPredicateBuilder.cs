@@ -2,7 +2,7 @@
 {
     public class DefaultPredicateBuilder<TEntity> : PredicateBuilder<TEntity>
     {
-
+        private const string NotEqualsPredicateFormat = "{0} != @0";
         private const string EqualsPredicateFormat = "{0} == @0";
         private const string GreaterThanPredicateFormat = "null != {0} && {0} > @0";
         private const string GreaterThanOrEqualsPredicateFormat = "null != {0} && {0} >= @0";
@@ -20,6 +20,8 @@
         {
             switch (op)
             {
+                case Filter.Operands.NotEqual:
+                    return string.Format(NotEqualsPredicateFormat, property);
                 case Filter.Operands.Equal:
                     return string.Format(EqualsPredicateFormat, property);
                 case Filter.Operands.GreaterThan:

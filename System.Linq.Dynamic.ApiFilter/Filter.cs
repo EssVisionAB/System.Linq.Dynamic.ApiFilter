@@ -9,6 +9,9 @@ namespace System.Linq.Dynamic.ApiFilter
         {
             public const string Like = "~";
             public const string Equal = ":";
+            // see issue#4 check for null and not null values
+            public const string NotEqual = "<>";
+
             public const string GreaterThan = ">";
             public const string GreaterThanOrEqual = ">:";
             public const string SmallerThan = "<";
@@ -22,7 +25,7 @@ namespace System.Linq.Dynamic.ApiFilter
         private const char apostrohpe = '\'';
 
         private static readonly string[] _operands =
-            { Operands.GreaterThanOrEqual, Operands.SmallerThanOrEqual, Operands.GreaterThan, Operands.SmallerThan, Operands.Equal, Operands.Like };
+            {Operands.NotEqual, Operands.GreaterThanOrEqual, Operands.SmallerThanOrEqual, Operands.GreaterThan, Operands.SmallerThan, Operands.Equal, Operands.Like };
 
         private Filter(string name, string op, params string[] values)
         {
@@ -39,14 +42,14 @@ namespace System.Linq.Dynamic.ApiFilter
         public static List<Filter> Parse(string filterValues)
         {
             var result = new List<Filter>();
-            var parts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+            var parts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.None) ?? new string[0];
             foreach (var filter in parts)
             {
                 var op = GetOperand(filter);
                 if (op == Operands.InclusiveOrEqual)
                 {
                     // NOTE: special case
-                    var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.RemoveEmptyEntries);
+                    var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.None);
                     var name = args[0];
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
@@ -58,7 +61,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 else if(op == Operands.InclusiveOrLike)
                 {
                     // NOTE: special case
-                    var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.RemoveEmptyEntries);
+                    var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.None);
                     var name = args[0];
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
@@ -69,7 +72,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 }
                 else
                 {
-                    var args = filter.Split(new string[] { op }, StringSplitOptions.RemoveEmptyEntries);
+                    var args = filter.Split(new string[] { op }, StringSplitOptions.None);
                     var name = args[0];                    
                     var value = RemoveApostrophes(args[1]);
 
@@ -82,6 +85,11 @@ namespace System.Linq.Dynamic.ApiFilter
         // Remove surrounding apostrophe characters
         static string RemoveApostrophes(string value)
         {
+            if (value.Length == 0)
+            {
+                return value;
+            }
+
             if (value.IndexOf(apostrohpe) == 0)
             {
                 value = value.Substring(1);
