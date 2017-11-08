@@ -74,6 +74,7 @@ Where targetTypeName is the fullname of the data type and builderType is an impl
  operands | sql equivalent | data types
 --- | --- | ---
  : | equal | all data types
+ <> | not equal | all data types
  ~ | like | string
  < | smaller than | all data types exept string
  <: | smaller than or equal | all data types exept string
