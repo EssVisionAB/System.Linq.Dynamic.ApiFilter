@@ -21,7 +21,7 @@ namespace System.Linq.Dynamic.ApiFilter
                     var result = new ArrayList();
                     foreach (var s in source)
                     {
-                        if(s.Equals("NULL"))
+                        if(s.Equals("NULL", StringComparison.OrdinalIgnoreCase))
                         {
                             result.Add(null);
                             continue;
