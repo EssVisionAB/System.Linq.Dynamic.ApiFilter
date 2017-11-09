@@ -21,6 +21,12 @@ namespace System.Linq.Dynamic.ApiFilter
                     var result = new ArrayList();
                     foreach (var s in source)
                     {
+                        if(s.Equals("NULL"))
+                        {
+                            result.Add(null);
+                            continue;
+                        }
+
                         var value = converter.ConvertFromString(s);
                         result.Add(value);
                     }
