@@ -120,13 +120,13 @@
   <data name="InvalidFilterAttributeException" xml:space="preserve">
     <value>Property '{0}' is not a member of the taget entity.</value>
   </data>
-  <data name="MissingOperandException" xml:space="preserve">
-    <value>Usupported filter operand.</value>
-  </data>
   <data name="OperandForAttributeNotSupportedException" xml:space="preserve">
     <value>The operand '{0}' is not supported for property '{1}'.</value>
   </data>
   <data name="UnsupportedArrayArgLength" xml:space="preserve">
     <value>Unsupporter array argument lengt.</value>
+  </data>
+  <data name="UnsupportedOperandException" xml:space="preserve">
+    <value>Supplied operand is not supported.</value>
   </data>
 </root>
