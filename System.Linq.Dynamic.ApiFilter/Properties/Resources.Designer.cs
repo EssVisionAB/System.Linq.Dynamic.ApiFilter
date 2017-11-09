@@ -70,15 +70,6 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usupported filter operand..
-        /// </summary>
-        internal static string MissingOperandException {
-            get {
-                return ResourceManager.GetString("MissingOperandException", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The operand &apos;{0}&apos; is not supported for property &apos;{1}&apos;..
         /// </summary>
         internal static string OperandForAttributeNotSupportedException {
@@ -93,6 +84,15 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         internal static string UnsupportedArrayArgLength {
             get {
                 return ResourceManager.GetString("UnsupportedArrayArgLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supplied operand is not supported..
+        /// </summary>
+        internal static string UnsupportedOperandException {
+            get {
+                return ResourceManager.GetString("UnsupportedOperandException", resourceCulture);
             }
         }
     }

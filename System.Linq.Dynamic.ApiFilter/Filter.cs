@@ -123,7 +123,7 @@ namespace System.Linq.Dynamic.ApiFilter
                 }
             }
 
-            throw new DynamicFilterException(Properties.Resources.MissingOperandException);
+            throw new DynamicFilterException(Properties.Resources.UnsupportedOperandException);
         }
     }
 #pragma warning restore 1591
