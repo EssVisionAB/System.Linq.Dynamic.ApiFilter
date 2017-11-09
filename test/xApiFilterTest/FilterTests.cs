@@ -53,7 +53,7 @@ namespace xApiFilterTest
             // Act
             var ex = Assert.Throws<DynamicFilterException>(() => Filter.Parse(filterString));
 
-            Assert.Equal("Usupported filter operand.", ex.Message);
+            Assert.Equal("Supplied operand is not supported.", ex.Message);
 
         }
 
