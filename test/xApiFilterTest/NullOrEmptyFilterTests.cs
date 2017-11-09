@@ -106,15 +106,17 @@ namespace xApiFilterTest
         }
 
         [Fact]
-        public void FilterEntities_TestEmptyString()
+        public void FilterEntities_TestNullOrEmptyString()
         {
             var source = new List<Model>
             {
-                new Model{ Name=""}, // TODO: should we support converting empty string arg to null
+                new Model(),
+                new Model{ Name=""},
                 new Model{Name="kalle"}
             }
             .AsQueryable();
 
+            // filter for null or empty
             var filterString = "Name<>";
 
             // Act
@@ -122,7 +124,7 @@ namespace xApiFilterTest
             var result = provider.ApplyFilter(source, filterString);
 
             // Assert
-            Assert.Equal(1, result.Count());
+            Assert.Equal(2, result.Count());
         }
     }
 }

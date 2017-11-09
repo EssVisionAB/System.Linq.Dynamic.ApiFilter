@@ -6,6 +6,7 @@
         private const string __LikePredicateFormat = "{0}.Contains(@0)";
         private const string __EqualsPredicateFormat = "{0} == @0";
         private const string __NotEqualsPredicateFormat = "{0} != @0";
+        private const string __NotEqualsOrNullPredicateFormat = "{0} != @0 || null == @0";
 
         private const string __InclusiveOrEqualPredicateFormat = "{0} == {1}";
         private const string __InclusiveOrLikePredicateFormat = "{1}.Contains({0})";
@@ -24,6 +25,11 @@
         protected virtual string NotEqualsPredicateFormat
         {
             get { return __NotEqualsPredicateFormat; }
+        }
+
+        protected virtual string NotEqualsOrNullPredicateFormat
+        {
+            get { return __NotEqualsOrNullPredicateFormat; }
         }
 
         protected virtual string InclusiveOrEqualPredicateFormat
@@ -52,7 +58,18 @@
                     return string.Format(EqualsPredicateFormat, property);
 
                 case Filter.Operands.NotEqual:
-                    return string.Format(NotEqualsPredicateFormat, property);
+
+                    // Check value. if string is empty test for not null or empty. See issue #7.
+                    // we already know value is of type string and since operand not is inclusive there can be only one value 
+                    var strValue = values.First() as string;
+                    if (string.IsNullOrEmpty(strValue))
+                    {
+                        return string.Format(NotEqualsOrNullPredicateFormat, property);
+                    }
+                    else
+                    {
+                        return string.Format(NotEqualsPredicateFormat, property);
+                    }
 
                 case Filter.Operands.InclusiveOrEqual:
                     {
