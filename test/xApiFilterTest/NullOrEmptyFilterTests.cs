@@ -116,8 +116,52 @@ namespace xApiFilterTest
             }
             .AsQueryable();
 
-            // filter for null or empty
+            // filter for not null or empty
             var filterString = "Name<>";
+
+            // Act
+            var provider = _filterProvider.Provider;
+            var result = provider.ApplyFilter(source, filterString);
+
+            // Assert
+            Assert.Equal(1, result.Count());
+        }
+
+        [Fact]
+        public void FilterEntities_EqualsNullArgument_DateTime()
+        {
+            var source = new List<Model>
+            {
+                new Model(),
+                new Model{ ClosedDate=DateTime.Now.AddDays(-3)},
+                new Model{ClosedDate=DateTime.MinValue}
+            }
+            .AsQueryable();
+
+            // filter for null
+            var filterString = "ClosedDate:NULL";
+
+            // Act
+            var provider = _filterProvider.Provider;
+            var result = provider.ApplyFilter(source, filterString);
+
+            // Assert
+            Assert.Equal(1, result.Count());
+        }
+
+        [Fact]
+        public void FilterEntities_EqualsNullArgument_String()
+        {
+            var source = new List<Model>
+            {
+                new Model(),
+                new Model{ Name=""},
+                new Model{Name="kalle"}
+            }
+            .AsQueryable();
+
+            // filter for null
+            var filterString = "Name:NULL";
 
             // Act
             var provider = _filterProvider.Provider;
