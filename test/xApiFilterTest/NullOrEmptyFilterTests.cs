@@ -124,7 +124,7 @@ namespace xApiFilterTest
             var result = provider.ApplyFilter(source, filterString);
 
             // Assert
-            Assert.Equal(2, result.Count());
+            Assert.Equal(1, result.Count());
         }
     }
 }

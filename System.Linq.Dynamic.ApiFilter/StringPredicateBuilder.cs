@@ -6,7 +6,7 @@
         private const string __LikePredicateFormat = "{0}.Contains(@0)";
         private const string __EqualsPredicateFormat = "{0} == @0";
         private const string __NotEqualsPredicateFormat = "{0} != @0";
-        private const string __NotEqualsOrNullPredicateFormat = "{0} != @0 || null == @0";
+        private const string __IsNullOrEmptyPredicateFormat = "!({0} == \"\" || {0} == null)";
 
         private const string __InclusiveOrEqualPredicateFormat = "{0} == {1}";
         private const string __InclusiveOrLikePredicateFormat = "{1}.Contains({0})";
@@ -27,9 +27,9 @@
             get { return __NotEqualsPredicateFormat; }
         }
 
-        protected virtual string NotEqualsOrNullPredicateFormat
+        protected virtual string IsNullOrEmptyPredicateFormat
         {
-            get { return __NotEqualsOrNullPredicateFormat; }
+            get { return __IsNullOrEmptyPredicateFormat; }
         }
 
         protected virtual string InclusiveOrEqualPredicateFormat
@@ -64,7 +64,7 @@
                     var strValue = values.First() as string;
                     if (string.IsNullOrEmpty(strValue))
                     {
-                        return string.Format(NotEqualsOrNullPredicateFormat, property);
+                        return string.Format(IsNullOrEmptyPredicateFormat, property);
                     }
                     else
                     {
