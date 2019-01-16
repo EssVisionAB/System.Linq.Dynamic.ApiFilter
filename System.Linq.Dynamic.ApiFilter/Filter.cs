@@ -18,7 +18,7 @@ namespace System.Linq.Dynamic.ApiFilter
             public const string SmallerThanOrEqual = "<:";
             // special case. Inclusive or equal. field:(value1, value2 ...). In Linq.Dynamic -> . Where("field == @0 || field == @1 ...")
             public const string InclusiveOrEqual = ":()";
-            // special case. Inclusive or like. field:(value1, value2 ...). In Linq.Dynamic -> .Where("field.Contains(@0) || field.Contains(@1) ...")
+            // special case. Inclusive or like. field~(value1, value2 ...). In Linq.Dynamic -> .Where("field.Contains(@0) || field.Contains(@1) ...")
             public const string InclusiveOrLike = "~()";
         }
 
