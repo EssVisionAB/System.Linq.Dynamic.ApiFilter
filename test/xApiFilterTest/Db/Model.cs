@@ -22,6 +22,8 @@ namespace xApiFilterTest.Db
         public User Responsible { get; set; }
 
         public ICollection<Contact> Contacts { get; set; }
+
+        public string Extension { get; set; }
     }
 
     public class User

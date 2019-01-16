@@ -86,7 +86,7 @@ namespace xApiFilterTest
                 var result = q.ToArray();
 
                 Assert.NotNull(result);
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("BBB", result.First().Name);
             }
         }
@@ -104,7 +104,7 @@ namespace xApiFilterTest
                 var result = q.ToArray();
 
                 Assert.NotNull(result);
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("AAA", result.First().Name);
             }
         }
@@ -138,22 +138,38 @@ namespace xApiFilterTest
                 var result = q.ToArray();
 
                 Assert.NotNull(result);
-                Assert.Equal(1, result.Length);
+                Assert.Single(result);
                 Assert.Equal("AAA", result.First().Name);
             }
         }
 
-        //[Fact]
-        public void FilterBy_ResponsibleIsNull()
+        [Fact]
+        public void FilterBy_Extension_InclusiveOr()
         {
-            // TODO: handle filter on null values
-            var filter = "responsible:null";
+            var filter = "extension:(.doc, .docx)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
                 q = _filterProvider.ApplyFilter(q, filter);
+
+                var result = q.ToArray();
+
+                Assert.NotNull(result);
+                Assert.Equal(2, result.Length);
             }
         }
+
+        //[Fact]
+        //public void FilterBy_ResponsibleIsNull()
+        //{
+        //    // TODO: handle filter on null values
+        //    var filter = "responsible:null";
+        //    using (var db = new Db.ModelDbContext(_dbOptions))
+        //    {
+        //        var q = db.Models.AsQueryable();
+        //        q = _filterProvider.ApplyFilter(q, filter);
+        //    }
+        //}
 
 
         [Fact]
