@@ -85,14 +85,16 @@
                         }
                         return result;
                     }
+                case Filter.Operands.InclusiveAndLike:
                 case Filter.Operands.InclusiveOrLike:
                     {
+                        var exp = op == Filter.Operands.InclusiveOrLike ? " || " : " && ";
                         var result = "";
                         for (int i = 0; i < values.Length; i++)
                         {
                             if (i > 0)
                             {
-                                result += " || ";
+                                result += exp;
                             }
 
                             result += string.Format(InclusiveOrLikePredicateFormat, "@" + i.ToString(), property);

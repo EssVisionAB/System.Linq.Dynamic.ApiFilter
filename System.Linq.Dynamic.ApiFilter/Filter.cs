@@ -20,6 +20,8 @@ namespace System.Linq.Dynamic.ApiFilter
             public const string InclusiveOrEqual = ":()";
             // special case. Inclusive or like. field~(value1, value2 ...). In Linq.Dynamic -> .Where("field.Contains(@0) || field.Contains(@1) ...")
             public const string InclusiveOrLike = "~()";
+            // special case. Inclusive and like. field~(value1, value2 ...). In Linq.Dynamic -> .Where("field.Contains(@0) && field.Contains(@1) ...")
+            public const string InclusiveAndLike = "~:()";
         }
 
         private const char apostrohpe = '\'';
@@ -50,6 +52,18 @@ namespace System.Linq.Dynamic.ApiFilter
                 {
                     // NOTE: special case
                     var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.None);
+                    var name = args[0];
+                    var values = args[1].Split(',')
+                                    .Select(s => s.Trim())
+                                    .Select(s => RemoveApostrophes(s))
+                                    .ToArray();
+
+                    result.Add(new Filter(name, op, values));
+                }
+                else if(op == Operands.InclusiveAndLike)
+                {
+                    // NOTE: special case
+                    var args = filter.Split(new string[] { "~:(", ")" }, StringSplitOptions.None);
                     var name = args[0];
                     var values = args[1].Split(',')
                                     .Select(s => s.Trim())
@@ -103,7 +117,11 @@ namespace System.Linq.Dynamic.ApiFilter
 
         static string GetOperand(string filter)
         {
-
+            if (filter.IndexOf("~:(") > 0 && filter.LastIndexOf(")") == filter.Length - 1)
+            {
+                // NOTE: special case
+                return Operands.InclusiveAndLike;
+            }
             if (filter.IndexOf(":(") > 0 && filter.LastIndexOf(")") == filter.Length - 1)
             {
                 // NOTE: special case

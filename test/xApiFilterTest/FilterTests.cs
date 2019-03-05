@@ -33,7 +33,7 @@ namespace xApiFilterTest
         }
 
         [Fact]
-        public void InclusiveOrFilter()
+        public void InclusiveFilter()
         {
             var filterString = "name:('a','b')";
             var filter = Filter.Parse(filterString).First();
