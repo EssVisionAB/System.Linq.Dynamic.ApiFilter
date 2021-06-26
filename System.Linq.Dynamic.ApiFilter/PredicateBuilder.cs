@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 
 namespace System.Linq.Dynamic.ApiFilter
 {
@@ -18,25 +19,43 @@ namespace System.Linq.Dynamic.ApiFilter
 
         public string Build(object[] values)
         {
+            if(null != Filter.OrFilters)
+            {
+                var filters = new List<string>();
+                foreach(var filter in Filter.OrFilters)
+                {
+                    filters.Add(BuildFilter(filter, values));
+                }
+
+                return string.Join(" || ", filters);
+            }
+
+            return BuildFilter(Filter, values);
+        }
+
+        private string BuildFilter(Filter filter, object[] values)
+        {
             string propName = null;
-            string result = null;
-            var propArray = Filter.Name.Split('.');
-            var op = Filter.Operand;
+            var propArray = filter.Name.Split('.');
+            var op = filter.Operand;
+            string result;
             try
             {
                 if (propArray[0].IsArrayOrCollection<TEntity>())
                 {
                     // we only support 2 levels on array elements
                     if (propArray.Length != 2)
+                    {
                         // TODO: custom exception
                         throw new DynamicFilterException(Properties.Resources.UnsupportedArrayArgLength);
+                    }
 
                     propName = propArray[1];
                     result = string.Format(ArrayPredicateFormat, propArray[0], GetPropertyFormat(propName, op, values));
                 }
                 else
                 {
-                    propName = Filter.Name;
+                    propName = filter.Name;
                     result = GetPropertyFormat(propName, op, values);
                 }
             }

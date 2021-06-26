@@ -33,13 +33,33 @@ namespace System.Linq.Dynamic.ApiFilter
 
             foreach (var f in filters)
             {
-                var targetType = f.GetTargetType<TEntity>();
-                var values = f.Values.ConvertFromStringValues(targetType);
+                if(null != f.OrFilters)
+                {
+                    var predicates = new List<string>();
+                    object[] values = new object[0];
+                    foreach(var f2 in f.OrFilters)
+                    {
+                        var targetType = f2.GetTargetType<TEntity>();
+                        values = f2.Values.ConvertFromStringValues(targetType);
 
-                var builder = _builderFactory.Create<TEntity>(f);
-                var predicate = builder.Build(values);
+                        var builder = _builderFactory.Create<TEntity>(f2);
+                        predicates.Add(builder.Build(values));
+                    }
 
-                query = query.Where(predicate, values);
+                    var predicate = string.Join(" || ", predicates);
+                    query = query.Where(predicate, values);
+                }
+                else
+                {
+                    var targetType = f.GetTargetType<TEntity>();
+                    var values = f.Values.ConvertFromStringValues(targetType);
+
+                    var builder = _builderFactory.Create<TEntity>(f);
+                    var predicate = builder.Build(values);
+
+                    query = query.Where(predicate, values);
+                }
+
             }
 
             return query;

@@ -36,64 +36,89 @@ namespace System.Linq.Dynamic.ApiFilter
             Values = values;
         }
 
+        private Filter(IList<Filter> orFilters)
+        {
+            OrFilters = orFilters;
+        }
+
         public string Name { get; set; }
         public string Operand { get; }
         public string[] Values { get; }
+        public IList<Filter> OrFilters { get; }
 
 
         public static List<Filter> Parse(string filterValues)
         {
             var result = new List<Filter>();
-            var parts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
-            foreach (var filter in parts)
+            var andParts = filterValues?.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries) ?? new string[0];
+            foreach (var filter in andParts)
             {
-                var op = GetOperand(filter);
-                if (op == Operands.InclusiveOrEqual)
+                var orParts = filter.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                if (orParts.Length > 1)
                 {
-                    // NOTE: special case
-                    var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.None);
-                    var name = args[0];
-                    var values = args[1].Split(',')
-                                    .Select(s => s.Trim())
-                                    .Select(s => RemoveApostrophes(s))
-                                    .ToArray();
-
-                    result.Add(new Filter(name, op, values));
-                }
-                else if(op == Operands.InclusiveAndLike)
-                {
-                    // NOTE: special case
-                    var args = filter.Split(new string[] { "~:(", ")" }, StringSplitOptions.None);
-                    var name = args[0];
-                    var values = args[1].Split(',')
-                                    .Select(s => s.Trim())
-                                    .Select(s => RemoveApostrophes(s))
-                                    .ToArray();
-
-                    result.Add(new Filter(name, op, values));
-                }
-                else if(op == Operands.InclusiveOrLike)
-                {
-                    // NOTE: special case
-                    var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.None);
-                    var name = args[0];
-                    var values = args[1].Split(',')
-                                    .Select(s => s.Trim())
-                                    .Select(s => RemoveApostrophes(s))
-                                    .ToArray();
-
-                    result.Add(new Filter(name, op, values));
+                    var orFilters = new List<Filter>();
+                    foreach(var orFilter in orParts)
+                    {
+                        CreateFilter(orFilters, orFilter);
+                    }
+                    result.Add(new Filter(orFilters));
                 }
                 else
                 {
-                    var args = filter.Split(new string[] { op }, StringSplitOptions.None);
-                    var name = args[0];                    
-                    var value = RemoveApostrophes(args[1]);
-
-                    result.Add(new Filter(name, op, value));
+                    CreateFilter(result, filter);
                 }
+                
             }
             return result;
+        }
+
+        private static void CreateFilter(List<Filter> result, string filter)
+        {
+            var op = GetOperand(filter);
+            if (op == Operands.InclusiveOrEqual)
+            {
+                // NOTE: special case
+                var args = filter.Split(new string[] { ":(", ")" }, StringSplitOptions.None);
+                var name = args[0];
+                var values = args[1].Split(',')
+                                .Select(s => s.Trim())
+                                .Select(s => RemoveApostrophes(s))
+                                .ToArray();
+
+                result.Add(new Filter(name, op, values));
+            }
+            else if (op == Operands.InclusiveAndLike)
+            {
+                // NOTE: special case
+                var args = filter.Split(new string[] { "~:(", ")" }, StringSplitOptions.None);
+                var name = args[0];
+                var values = args[1].Split(',')
+                                .Select(s => s.Trim())
+                                .Select(s => RemoveApostrophes(s))
+                                .ToArray();
+
+                result.Add(new Filter(name, op, values));
+            }
+            else if (op == Operands.InclusiveOrLike)
+            {
+                // NOTE: special case
+                var args = filter.Split(new string[] { "~(", ")" }, StringSplitOptions.None);
+                var name = args[0];
+                var values = args[1].Split(',')
+                                .Select(s => s.Trim())
+                                .Select(s => RemoveApostrophes(s))
+                                .ToArray();
+
+                result.Add(new Filter(name, op, values));
+            }
+            else
+            {
+                var args = filter.Split(new string[] { op }, StringSplitOptions.None);
+                var name = args[0];
+                var value = RemoveApostrophes(args[1]);
+
+                result.Add(new Filter(name, op, value));
+            }
         }
 
         // Remove surrounding apostrophe characters

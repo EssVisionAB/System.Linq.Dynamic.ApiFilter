@@ -4,11 +4,19 @@ using System.Linq;
 using System.Linq.Dynamic.ApiFilter;
 using System.Text;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace xApiFilterTest
 {
     public class FilterTests
     {
+        private readonly ITestOutputHelper _testOutput;
+
+        public FilterTests(ITestOutputHelper testOutput)
+        {
+            _testOutput = testOutput;
+        }
+
         [Fact]
         public void StringEqualFilter()
         {
@@ -55,6 +63,27 @@ namespace xApiFilterTest
 
             Assert.Equal("Supplied operand is not supported.", ex.Message);
 
+        }
+
+        [Fact]
+        public void Lab()
+        {
+            var value = "berit";
+            var filterString = $"contact.name~'{value}'|name~'{value}";
+
+            var result = new List<string>();
+            var andPredicates = filterString.Split(';', StringSplitOptions.RemoveEmptyEntries);
+            foreach(var predicate in andPredicates)
+            {
+                var temp = predicate.Split('|', StringSplitOptions.RemoveEmptyEntries);
+                var orPredicate = string.Join(" || ", temp);
+                result.Add(orPredicate);                        
+            }
+
+            foreach(var r in result)
+            {
+                _testOutput.WriteLine(r);
+            }
         }
 
     }

@@ -42,7 +42,7 @@ namespace xApiFilterTest
         public void FilterBy_Name_InclusiveOrEqual()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "name:(AAA,BBB,CCC)";
+            var filter = "name:(Olle,BBB,CCC)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -59,7 +59,7 @@ namespace xApiFilterTest
         public void FilterBy_Name_InclusiveOrLike()
         {
             // NOTE: we are using in-memory-db so it's case sensitive
-            var filter = "name~(A,B,C)";
+            var filter = "name~(O,B,C)";
             using (var db = new Db.ModelDbContext(_dbOptions))
             {
                 var q = db.Models.AsQueryable();
@@ -105,7 +105,7 @@ namespace xApiFilterTest
 
                 Assert.NotNull(result);
                 Assert.Single(result);
-                Assert.Equal("AAA", result.First().Name);
+                Assert.Equal("Olle", result.First().Name);
             }
         }
 
@@ -139,7 +139,7 @@ namespace xApiFilterTest
 
                 Assert.NotNull(result);
                 Assert.Single(result);
-                Assert.Equal("AAA", result.First().Name);
+                Assert.Equal("Olle", result.First().Name);
             }
         }
 
@@ -159,17 +159,41 @@ namespace xApiFilterTest
             }
         }
 
-        //[Fact]
-        //public void FilterBy_ResponsibleIsNull()
-        //{
-        //    // TODO: handle filter on null values
-        //    var filter = "responsible:null";
-        //    using (var db = new Db.ModelDbContext(_dbOptions))
-        //    {
-        //        var q = db.Models.AsQueryable();
-        //        q = _filterProvider.ApplyFilter(q, filter);
-        //    }
-        //}
+        [Fact]
+        public void FilterByOr()
+        {
+            var value = "Olle";
+            var filter = $"responsible.name~{value}|name~{value}";
+
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                q = _filterProvider.ApplyFilter(q, filter);
+
+                var result = q.ToArray();
+
+                Assert.NotNull(result);
+                Assert.Equal(2, result.Length);
+            }
+        }
+
+        [Fact]
+        public void FilterByAndOr()
+        {
+            var value = "Olle";
+            var filter = $"registereddate>:2017-01-01;responsible.name~{value}|name~{value}";
+
+            using (var db = new Db.ModelDbContext(_dbOptions))
+            {
+                var q = db.Models.AsQueryable();
+                q = _filterProvider.ApplyFilter(q, filter);
+
+                var result = q.ToArray();
+
+                Assert.NotNull(result);
+                Assert.Single(result);
+            }
+        }
 
 
         [Fact]
