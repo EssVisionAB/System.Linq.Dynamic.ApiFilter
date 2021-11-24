@@ -3,6 +3,8 @@
 Portable core-level .NET class library. 
 Parses and applies query string filters to be used on data entities or in-memory collections. 
 
+![](https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter/workflows/.NET/badge.svg)
+
 ### Filter example1:
 ```
 http://example.com/documents?filter=contacts.name~adam
