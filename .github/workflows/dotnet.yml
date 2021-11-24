@@ -1,4 +1,4 @@
-name: .NET
+name: main
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-deploy:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
 
