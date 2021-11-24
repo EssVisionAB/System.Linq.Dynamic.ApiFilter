@@ -1,0 +1,34 @@
+name: .NET
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        source-url: https://nuget.pkg.github.com/EssVisionAB/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.READ_WRITE_NUGET}}
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration Release
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration Release
+      
+    - name: Create the package
+      run: dotnet pack --configuration Release System.Linq.Dynamic.ApiFilter
+
+    - name: Publish the package to GPR
+      run: dotnet nuget push System.Linq.Dynamic.ApiFilter/bin/Release/*.nupkg --skip-duplicate --api-key ${{ secrets.READ_WRITE_NUGET }}
