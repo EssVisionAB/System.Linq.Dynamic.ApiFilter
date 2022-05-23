@@ -116,7 +116,7 @@ namespace xApiFilterTest
             }
             .AsQueryable();
 
-            // filter for not null or empty
+            // filter for null or empty
             var filterString = "Name<>";
 
             // Act
