@@ -24,6 +24,8 @@ namespace xApiFilterTest.Db
         public ICollection<Contact> Contacts { get; set; }
 
         public string Extension { get; set; }
+
+
     }
 
     public class User

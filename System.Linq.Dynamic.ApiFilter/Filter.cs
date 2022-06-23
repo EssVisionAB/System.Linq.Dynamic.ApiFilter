@@ -27,7 +27,15 @@ namespace System.Linq.Dynamic.ApiFilter
         private const char apostrohpe = '\'';
 
         private static readonly string[] _operands =
-            {Operands.NotEqual, Operands.GreaterThanOrEqual, Operands.SmallerThanOrEqual, Operands.GreaterThan, Operands.SmallerThan, Operands.Equal, Operands.Like };
+        {
+            Operands.NotEqual, 
+            Operands.GreaterThanOrEqual, 
+            Operands.SmallerThanOrEqual, 
+            Operands.GreaterThan, 
+            Operands.SmallerThan, 
+            Operands.Equal, 
+            Operands.Like
+        };
 
         private Filter(string name, string op, params string[] values)
         {

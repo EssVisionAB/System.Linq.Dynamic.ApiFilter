@@ -43,15 +43,35 @@ namespace System.Linq.Dynamic.ApiFilter
             {
                 if (propArray[0].IsArrayOrCollection<TEntity>())
                 {
-                    // we only support 2 levels on array elements
-                    if (propArray.Length != 2)
+                    // NOTE: Special case for primitive string arrays
+                    // TODO: Check that source type is string[]
+                    if(propArray.Length == 1 && (op == Filter.Operands.Equal || op == Filter.Operands.Like))
                     {
-                        // TODO: custom exception
-                        throw new DynamicFilterException(Properties.Resources.UnsupportedArrayArgLength);
+                        if(op == Filter.Operands.Like)
+                        {
+                            result = $"{propArray[0]}.Any(s => s.Contains(\"{values[0]}\"))";
+                        }
+                        else if (op == Filter.Operands.Equal)
+                        {
+                            result = $"{propArray[0]}.Contains(\"{values[0]}\")";
+                        }
+                        else
+                        {
+                            throw new DynamicFilterException($"Operand {op} is not supported for primitive string arrays");
+                        }
                     }
+                    else
+                    {
+                        // we only support 2 levels on array elements
+                        if (propArray.Length != 2)
+                        {
+                            // TODO: custom exception
+                            throw new DynamicFilterException(Properties.Resources.UnsupportedArrayArgLength);
+                        }
 
-                    propName = propArray[1];
-                    result = string.Format(ArrayPredicateFormat, propArray[0], GetPropertyFormat(propName, op, values));
+                        propName = propArray[1];
+                        result = string.Format(ArrayPredicateFormat, propArray[0], GetPropertyFormat(propName, op, values));
+                    }
                 }
                 else
                 {
