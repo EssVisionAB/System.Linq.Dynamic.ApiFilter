@@ -25,7 +25,7 @@ namespace System.Linq.Dynamic.ApiFilter
         {
             if(!typeof(IPredicateBuilder).IsAssignableFrom(builderType))
             {
-                throw new ArgumentException(string.Format("Builder type must be assiggnable from {0}", typeof(IPredicateBuilder)));
+                throw new ArgumentException(string.Format("Builder type must be assignable from {0}", typeof(IPredicateBuilder)));
             }
 
             if (BuilderTypes.ContainsKey(targetTypeName))

@@ -61,7 +61,7 @@ namespace System.Linq.Dynamic.ApiFilter.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Property &apos;{0}&apos; is not a member of the taget entity..
+        ///   Looks up a localized string similar to Property &apos;{0}&apos; is not a member of the target entity..
         /// </summary>
         internal static string InvalidFilterAttributeException {
             get {
