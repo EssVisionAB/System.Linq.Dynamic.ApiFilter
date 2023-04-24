@@ -206,7 +206,7 @@ namespace xApiFilterTest
                 // Act
                 var ex = Assert.Throws<DynamicFilterException>(() => _filterProvider.ApplyFilter(q, filter));
 
-                Assert.Equal("Property 'description' is not a member of the taget entity.", ex.Message);
+                Assert.Equal("Property 'description' is not a member of the target entity.", ex.Message);
             }
         }
 

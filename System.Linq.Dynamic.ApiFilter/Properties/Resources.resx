@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="InvalidFilterAttributeException" xml:space="preserve">
-    <value>Property '{0}' is not a member of the taget entity.</value>
+    <value>Property '{0}' is not a member of the target entity.</value>
   </data>
   <data name="OperandForAttributeNotSupportedException" xml:space="preserve">
     <value>The operand '{0}' is not supported for property '{1}'.</value>
