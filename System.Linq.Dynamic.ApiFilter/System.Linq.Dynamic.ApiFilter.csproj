@@ -5,12 +5,12 @@
     <PackageId>System.Linq.Dynamic.ApiFilter</PackageId>
     <Product>System.Linq.Dynamic.ApiFilter</Product>
     <Title>System.Linq.Dynamic.ApiFilter</Title>
-    <PackageVersion>1.2.1</PackageVersion>
+    <PackageVersion>1.2.2</PackageVersion>
     <Authors>theblomskog</Authors>
     <Description>Portable core-level .NET class library. Parses and applies query string filters to be used on data entities or in-memory collections</Description>
     <Copyright>Copyright © 2017 Tommy Blomskog</Copyright>
     <PackageProjectUrl>https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</PackageLicenseUrl>
+    <PackageLicense>https://github.com/EssVisionAB/System.Linq.Dynamic.ApiFilter/blob/master/LICENSE.md</PackageLicense>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.2.2</Version>
