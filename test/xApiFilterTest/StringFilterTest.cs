@@ -41,6 +41,7 @@ namespace xApiFilterTest
 
         class MyModel
         {
+            public string Id { get; set; }
             public string Keywords { get; set; }
         }
 
